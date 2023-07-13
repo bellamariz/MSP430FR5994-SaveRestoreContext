@@ -1,0 +1,6 @@
+"./main.obj"
+"./save.obj"
+"../lnk_msp430fr5994.cmd"
+-llibmath.a
+-llibmpu_init.a
+-llibc.a
