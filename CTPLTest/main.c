@@ -1,24 +1,29 @@
 #include <msp430.h>
 #include <ctpl.h>
+#include "scheduler.h"
 
-int _system_pre_init(void) {
-    ctpl_init();
+// create tasks
+
+int _system_pre_init(void)
+{
+    ctpl_init(); // Initialize ctpl library
+
+    WDTCTL = WDTPW | WDTHOLD;    // Stop watchdog timer
+
+    // setupTasks(1, /* task pointers */);
+
     return 1;
 }
+
 
 /*
  * main.c
  */
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;    // Stop watchdog timer
-
-    int counter = 0;
-
     while (1) {
-        if ((counter % 10000) == 0) {
-            // turn on led
-        }
+        procTasks();
+        break;
     }
 
     return 0;

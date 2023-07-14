@@ -32,7 +32,7 @@ __MSP430_HAS_DMA__  .set    1
 ; Macro for performing copy with either CPU or DMA
 copyx   .macro    src, dst, len
     .if $defined(__MSP430_HAS_DMA__)
-        clr.b   &DMA0CTL_L      ; sw trigger, channel 0
+        clr.b   &DMA0CTL        ; sw trigger, channel 0
         movx.a  src,&DMA0SA     ; set src address
         movx.a  dst,&DMA0DA     ; set dst address
         rra.w   len             ; divide length by 2
@@ -51,7 +51,7 @@ ctpl_copyLoop?:
 fillx   .macro    dst, len, val
     .if $defined(__MSP430_HAS_DMA__)
         movx.w  val,0(dst)      ; fill first value
-        clr.b   &DMA0CTL_L      ; sw trigger, channel 0
+        clr.b   &DMA0CTL        ; sw trigger, channel 0
         movx.a  dst,&DMA0SA     ; set src address
         movx.a  dst,&DMA0DA     ; set dst address
         rra.w   len             ; divide length by 2
