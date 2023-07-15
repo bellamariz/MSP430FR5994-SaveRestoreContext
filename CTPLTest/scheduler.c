@@ -20,9 +20,9 @@ void setupTasks(unsigned char doSetup, ...){
     maxTasks = MAX_APP_TASKS;
 
     va_start(args,doSetup);
-    auxPtr[taskCount++]=va_arg(args,task_ptr_t);
+    // auxPtr[taskCount++]=va_arg(args,task_ptr_t);
 
-    while ((auxPtr[taskCount++]=va_arg(args,task_ptr_t)) != 0 & taskCount < maxTasks){
+    while (((auxPtr[taskCount++]=va_arg(args,task_ptr_t)) != 0) && (taskCount < maxTasks)){
       auxFlag[taskCount]=false;
       auxArg[taskCount]=0;
     }
@@ -83,7 +83,7 @@ void procTasks(){
                 if (auxFlag[tt]==true){
                     auxFlag[tt]=false;
                     haveTasks=true;
-                    auxPtr[tt](auxArg[tt]);
+                    auxPtr[tt](/*auxArg[tt]*/);
                 }
             }
         }

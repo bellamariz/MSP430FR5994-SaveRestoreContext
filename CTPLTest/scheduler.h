@@ -13,15 +13,14 @@
 #include <stdbool.h>
 
 #ifndef MAX_APP_TASKS
-#define MAX_APP_TASKS 10
+#define MAX_APP_TASKS 1
 #endif
 
 typedef enum {app=0,vtimer} taskId_t;
-typedef void (*task_ptr_t)(unsigned char);
+typedef void (*task_ptr_t)(void/* unsigned char */);
 
 void setupTasks(unsigned char doSetup, ...);
 char getTaskIdx(task_ptr_t fx);
-void postVTTaskById(unsigned char taskId);
 char postTask(task_ptr_t fx, unsigned char arg1);
 void procTasks();
 
