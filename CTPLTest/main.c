@@ -40,6 +40,7 @@ void sort_array_green(void) {
 
     blink_led11(2);
     // ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_64_MS);
+    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
 }
 
 // sorts an array and blinks led once
@@ -51,6 +52,7 @@ void sort_array_red(void) {
     // blinks led
     blink_led10(1);
     // ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_64_MS);
+    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
 }
 
 int _system_pre_init(void) {
@@ -76,12 +78,10 @@ int main(void) {
     unsigned int* p = &a;
 
     while ((a++) < 10) {
-        blink_led11(a);
         postTask(sort_array_red, 2);
-        // postTask(sort_array_green, 5);
+        postTask(sort_array_green, 5);
 
         procTasks();
-        ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
     }
 
     return 0;
