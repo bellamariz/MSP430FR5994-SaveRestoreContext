@@ -33,26 +33,22 @@ void blink_led11(int blink_count) {
 }
 
 // create tasks
-void sort_array_green(void) {
+void sort_array_green(unsigned char blink_count) {
     int a[25] = {1, 5, 2, 6, 12, 31, 87, 54, 112, 74, 53, 4, 101, 9, 121, 63, 64, 147, 12, 93, 23, 12, 1, 12, 7};
 
     qsort(a, 25, sizeof(int), cmpfunc);
 
-    blink_led11(2);
-    // ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_64_MS);
-    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
+    blink_led11(blink_count);
 }
 
 // sorts an array and blinks led once
-void sort_array_red(void) {
+void sort_array_red(unsigned char blink_count) {
     int a[25] = {1, 5, 2, 6, 12, 31, 87, 54, 112, 74, 53, 4, 101, 9, 121, 63, 64, 147, 12, 93, 23, 12, 1, 12, 7};
 
     qsort(a, 25, sizeof(int), cmpfunc);
 
     // blinks led
-    blink_led10(1);
-    // ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_64_MS);
-    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
+    blink_led10(blink_count);
 }
 
 int _system_pre_init(void) {
@@ -74,10 +70,7 @@ int _system_pre_init(void) {
  * main.c
  */
 int main(void) {
-    a = 0;
-    unsigned int* p = &a;
-
-    while ((a++) < 10) {
+    while (1) {
         postTask(sort_array_red, 2);
         postTask(sort_array_green, 5);
 

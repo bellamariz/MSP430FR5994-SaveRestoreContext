@@ -84,7 +84,8 @@ void procTasks(){
                 if (auxFlag[tt]==true){
                     auxFlag[tt]=false;
                     haveTasks=true;
-                    auxPtr[tt](/*auxArg[tt]*/);
+                    auxPtr[tt](auxArg[tt]);
+                    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
                 }
             }
         }

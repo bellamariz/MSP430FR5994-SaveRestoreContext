@@ -11,13 +11,15 @@
 #include <stdarg.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <ctpl.h>
+#include <msp430.h>
 
 #ifndef MAX_APP_TASKS
 #define MAX_APP_TASKS 5
 #endif
 
 typedef enum {app=0,vtimer} taskId_t;
-typedef void (*task_ptr_t)(void/* unsigned char */);
+typedef void (*task_ptr_t)(unsigned char);
 
 void setupTasks(unsigned char doSetup, ...);
 char getTaskIdx(task_ptr_t fx);
