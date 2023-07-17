@@ -13,7 +13,7 @@
 #include <stdbool.h>
 
 #ifndef MAX_APP_TASKS
-#define MAX_APP_TASKS 1
+#define MAX_APP_TASKS 5
 #endif
 
 typedef enum {app=0,vtimer} taskId_t;

@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Jul 14 21:11:18 2023
+>> Linked Mon Jul 17 15:50:15 2023
 
 OUTPUT FILE NAME:   <CTPLTest.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 00004400
@@ -20,7 +20,7 @@ MEMORY CONFIGURATION
   RAM                   00001c00   00001000  000000a0  00000f60  RWIX
   LEARAM                00002c00   00000ec8  00000000  00000ec8  RWIX
   LEASTACK              00003ac8   00000138  00000000  00000138  RWIX
-  FRAM                  00004000   0000bf80  000005d0  0000b9b0  RWIX
+  FRAM                  00004000   0000bf80  00000602  0000b97e  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   IPESIGNATURE          0000ff88   00000008  00000008  00000000  RWIX  ffff 
@@ -80,7 +80,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00034000  00000c02  000333fe  RWIX
+  FRAM2                 00010000   00034000  00000c2c  000333d4  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -88,39 +88,40 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.bss       0    00004000    00000004     UNINITIALIZED
-                  00004000    00000004     (.common:_appTasks)
+.bss       0    00004000    00000016     UNINITIALIZED
+                  00004000    00000014     (.common:_appTasks)
+                  00004014    00000002     (.common:a)
 
 .binit     0    00004000    00000000     
 
-.data      0    00004004    00000003     UNINITIALIZED
-                  00004004    00000001     scheduler.obj (.data:_appTasksArg)
-                  00004005    00000001     --HOLE--
-                  00004006    00000001     scheduler.obj (.data:_appTasksFlag)
+.data      0    00004016    0000000b     UNINITIALIZED
+                  00004016    00000005     scheduler.obj (.data:_appTasksArg)
+                  0000401b    00000001     --HOLE--
+                  0000401c    00000005     scheduler.obj (.data:_appTasksFlag)
 
 .TI.noinit 
-*          0    00004007    00000000     UNINITIALIZED
+*          0    00004021    00000000     UNINITIALIZED
 
 .TI.persistent 
-*          0    00004008    00000126     UNINITIALIZED
-                  00004008    000000a6     ctpl_low_level.obj (.TI.persistent)
-                  000040ae    00000012     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_MPY32_storage)
-                  000040c0    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_MPU_storage)
-                  000040ce    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTA_storage)
-                  000040dc    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTB_storage)
-                  000040ea    0000000c     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_CS_storage)
-                  000040f6    0000000c     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_RTC_C_storage)
-                  00004102    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTC_storage)
-                  0000410c    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTD_storage)
-                  00004116    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTJ_storage)
-                  00004120    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_FRAM_storage)
-                  00004124    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_SFR_storage)
-                  00004128    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_SYS_storage)
-                  0000412c    00000002     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_WDT_A_storage)
+*          0    00004022    00000126     UNINITIALIZED
+                  00004022    000000a6     ctpl_low_level.obj (.TI.persistent)
+                  000040c8    00000012     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_MPY32_storage)
+                  000040da    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_MPU_storage)
+                  000040e8    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTA_storage)
+                  000040f6    0000000e     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTB_storage)
+                  00004104    0000000c     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_CS_storage)
+                  00004110    0000000c     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_RTC_C_storage)
+                  0000411c    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTC_storage)
+                  00004126    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTD_storage)
+                  00004130    0000000a     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_PORTJ_storage)
+                  0000413a    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_FRAM_storage)
+                  0000413e    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_SFR_storage)
+                  00004142    00000004     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_SYS_storage)
+                  00004146    00000002     ctpl_msp430fr5994.obj (.TI.persistent:ctpl_WDT_A_storage)
 
-.cio       0    0000412e    00000000     UNINITIALIZED
+.cio       0    00004148    00000000     UNINITIALIZED
 
-.sysmem    0    0000412e    00000000     UNINITIALIZED
+.sysmem    0    00004148    00000000     UNINITIALIZED
 
 .ipestruct 
 *          0    00004400    00000000     UNINITIALIZED
@@ -133,12 +134,12 @@ section   page    origin      length       input sections
 .ipe:_isr 
 *          0    00004400    00000000     UNINITIALIZED
 
-.cinit     0    00004596    0000003a     
-                  00004596    0000000c     (__TI_handler_table)
-                  000045a2    00000009     (.cinit..TI.persistent.load) [load image, compression = lzss]
-                  000045ab    00000007     (.cinit..data.load) [load image, compression = lzss]
-                  000045b2    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  000045b8    00000018     (__TI_cinit_table)
+.cinit     0    000045c8    0000003a     
+                  000045c8    0000000c     (__TI_handler_table)
+                  000045d4    00000009     (.cinit..TI.persistent.load) [load image, compression = lzss]
+                  000045dd    00000007     (.cinit..data.load) [load image, compression = lzss]
+                  000045e4    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  000045ea    00000018     (__TI_cinit_table)
 
 .init_array 
 *          0    00004000    00000000     UNINITIALIZED
@@ -287,88 +288,90 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.const     0    00004428    0000016e     
+.const     0    00004428    000001a0     
                   00004428    00000034     ctpl_msp430fr5994.obj (.const:ctpl_peripherals)
                   0000445c    00000032     main.obj (.const:$P$T0$1)
-                  0000448e    0000001c     gpio.obj (.const:GPIO_PORT_TO_BASE)
-                  000044aa    00000012     ctpl_msp430fr5994.obj (.const:ctpl_CS)
-                  000044bc    00000012     ctpl_msp430fr5994.obj (.const:ctpl_FRAM)
-                  000044ce    00000012     ctpl_msp430fr5994.obj (.const:ctpl_MPU)
-                  000044e0    00000012     ctpl_msp430fr5994.obj (.const:ctpl_MPY32)
-                  000044f2    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTA)
-                  00004504    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTB)
-                  00004516    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTC)
-                  00004528    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTD)
-                  0000453a    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTJ)
-                  0000454c    00000012     ctpl_msp430fr5994.obj (.const:ctpl_RTC_C)
-                  0000455e    00000012     ctpl_msp430fr5994.obj (.const:ctpl_SFR)
-                  00004570    00000012     ctpl_msp430fr5994.obj (.const:ctpl_SYS)
-                  00004582    00000012     ctpl_msp430fr5994.obj (.const:ctpl_WDT_A)
-                  00004594    00000002     ctpl_msp430fr5994.obj (.const)
+                  0000448e    00000032     main.obj (.const:$P$T1$2)
+                  000044c0    0000001c     gpio.obj (.const:GPIO_PORT_TO_BASE)
+                  000044dc    00000012     ctpl_msp430fr5994.obj (.const:ctpl_CS)
+                  000044ee    00000012     ctpl_msp430fr5994.obj (.const:ctpl_FRAM)
+                  00004500    00000012     ctpl_msp430fr5994.obj (.const:ctpl_MPU)
+                  00004512    00000012     ctpl_msp430fr5994.obj (.const:ctpl_MPY32)
+                  00004524    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTA)
+                  00004536    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTB)
+                  00004548    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTC)
+                  0000455a    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTD)
+                  0000456c    00000012     ctpl_msp430fr5994.obj (.const:ctpl_PORTJ)
+                  0000457e    00000012     ctpl_msp430fr5994.obj (.const:ctpl_RTC_C)
+                  00004590    00000012     ctpl_msp430fr5994.obj (.const:ctpl_SFR)
+                  000045a2    00000012     ctpl_msp430fr5994.obj (.const:ctpl_SYS)
+                  000045b4    00000012     ctpl_msp430fr5994.obj (.const:ctpl_WDT_A)
+                  000045c6    00000002     ctpl_msp430fr5994.obj (.const)
 
-.text      0    00010000    00000c02     
+.text      0    00010000    00000c2c     
                   00010000    00000144     ctpl_low_level.obj (.text:ctpl_low_level)
                   00010144    000000fa     ctpl.obj (.text:ctpl_saveEnterLpmRestore)
                   0001023e    000000f6     rts430x_lc_rd_eabi.lib : qsort.c.obj (.text:qsort)
-                  00010334    00000094     main.obj (.text:main)
-                  000103c8    00000090     ctpl_rtc_c.obj (.text:ctpl_RTC_C_restore)
-                  00010458    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  000104ce    0000006a     ctpl_mpy32.obj (.text:ctpl_MPY32_restore)
-                  00010538    0000005c     scheduler.obj (.text:setupTasks)
-                  00010594    0000005a     ctpl_mpu.obj (.text:ctpl_MPU_restore)
-                  000105ee    0000005a     ctpl_mpy32.obj (.text:ctpl_MPY32_save)
-                  00010648    00000056     main.obj (.text:blink_led)
-                  0001069e    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  000106f2    00000052     ctpl_cs.obj (.text:ctpl_CS_restore)
-                  00010744    00000052     ctpl_port_int.obj (.text:ctpl_PORT_INT_save)
-                  00010796    00000052     scheduler.obj (.text:procTasks)
-                  000107e8    0000004e     ctpl_port_int.obj (.text:ctpl_PORT_INT_restore)
-                  00010836    00000048     ctpl_rtc_c.obj (.text:ctpl_RTC_C_save)
-                  0001087e    00000044     main.obj (.text:_system_pre_init)
-                  000108c2    0000003c     ctpl_mpu.obj (.text:ctpl_MPU_save)
-                  000108fe    00000036     ctpl_cs.obj (.text:ctpl_CS_save)
-                  00010934    00000036     ctpl_port.obj (.text:ctpl_PORT_restore)
-                  0001096a    00000036     main.obj (.text:sort_array)
-                  000109a0    00000034     gpio.obj (.text:GPIO_setAsOutputPin)
-                  000109d4    0000002e     ctpl_port.obj (.text:ctpl_PORT_save)
-                  00010a02    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00010a2e    00000028     scheduler.obj (.text:getTaskIdx)
-                  00010a56    00000028     scheduler.obj (.text:postTask)
-                  00010a7e    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00010aa2    0000001c     gpio.obj (.text:GPIO_setOutputHighOnPin)
-                  00010abe    0000001c     gpio.obj (.text:GPIO_setOutputLowOnPin)
-                  00010ada    0000001c     ctpl_fram.obj (.text:ctpl_FRAM_restore)
-                  00010af6    0000001a     ctpl_sys.obj (.text:ctpl_SYS_restore)
-                  00010b10    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.asm.obj (.text)
-                  00010b28    00000016     wdt_a.obj (.text:WDT_A_hold)
-                  00010b3e    00000014     rts430x_lc_rd_eabi.lib : memcpy.c.obj (.text:memcpy)
-                  00010b52    00000012     ctpl_sfr.obj (.text:ctpl_SFR_save)
-                  00010b64    00000012     rts430x_lc_rd_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00010b76    00000010     ctpl_port_int.obj (.text:ctpl_PORT_INT_epilogue)
-                  00010b86    00000010     ctpl_sys.obj (.text:ctpl_SYS_save)
-                  00010b96    00000010     main.obj (.text:test)
-                  00010ba6    0000000e     ctpl_fram.obj (.text:ctpl_FRAM_save)
-                  00010bb4    0000000e     ctpl_wdt_a.obj (.text:ctpl_WDT_A_epilogue)
-                  00010bc2    0000000e     ctpl.obj (.text:ctpl_enterShutdown)
-                  00010bd0    0000000c     ctpl_wdt_a.obj (.text:ctpl_WDT_A_save)
-                  00010bdc    0000000a     ctpl_sfr.obj (.text:ctpl_SFR_restore)
-                  00010be6    00000006     pmm.obj (.text:PMM_unlockLPM5)
-                  00010bec    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  00010bf2    00000006     main.obj (.text:cmpfunc)
-                  00010bf8    00000006     ctpl_sfr.obj (.text:ctpl_SFR_epilogue)
-                  00010bfe    00000002     rts430x_lc_rd_eabi.lib : startup.c.obj (.text:_system_post_cinit)
-                  00010c00    00000002     ctpl_wdt_a.obj (.text:ctpl_WDT_A_restore)
+                  00010334    00000090     ctpl_rtc_c.obj (.text:ctpl_RTC_C_restore)
+                  000103c4    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0001043a    0000006a     ctpl_mpy32.obj (.text:ctpl_MPY32_restore)
+                  000104a4    0000005e     scheduler.obj (.text:setupTasks)
+                  00010502    0000005a     ctpl_mpu.obj (.text:ctpl_MPU_restore)
+                  0001055c    0000005a     ctpl_mpy32.obj (.text:ctpl_MPY32_save)
+                  000105b6    00000056     main.obj (.text:blink_led10)
+                  0001060c    00000056     main.obj (.text:blink_led11)
+                  00010662    00000056     scheduler.obj (.text:procTasks)
+                  000106b8    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  0001070c    00000052     ctpl_cs.obj (.text:ctpl_CS_restore)
+                  0001075e    00000052     ctpl_port_int.obj (.text:ctpl_PORT_INT_save)
+                  000107b0    0000004e     ctpl_port_int.obj (.text:ctpl_PORT_INT_restore)
+                  000107fe    00000048     main.obj (.text:_system_pre_init)
+                  00010846    00000048     ctpl_rtc_c.obj (.text:ctpl_RTC_C_save)
+                  0001088e    00000048     main.obj (.text:main)
+                  000108d6    0000003c     ctpl_mpu.obj (.text:ctpl_MPU_save)
+                  00010912    00000036     ctpl_cs.obj (.text:ctpl_CS_save)
+                  00010948    00000036     ctpl_port.obj (.text:ctpl_PORT_restore)
+                  0001097e    00000034     gpio.obj (.text:GPIO_setAsOutputPin)
+                  000109b2    0000002e     ctpl_port.obj (.text:ctpl_PORT_save)
+                  000109e0    0000002e     main.obj (.text:sort_array_green)
+                  00010a0e    0000002e     main.obj (.text:sort_array_red)
+                  00010a3c    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00010a68    0000002a     scheduler.obj (.text:getTaskIdx)
+                  00010a92    00000028     scheduler.obj (.text:postTask)
+                  00010aba    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00010ade    0000001c     gpio.obj (.text:GPIO_setOutputHighOnPin)
+                  00010afa    0000001c     gpio.obj (.text:GPIO_setOutputLowOnPin)
+                  00010b16    0000001c     ctpl_fram.obj (.text:ctpl_FRAM_restore)
+                  00010b32    0000001a     ctpl_sys.obj (.text:ctpl_SYS_restore)
+                  00010b4c    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.asm.obj (.text)
+                  00010b64    00000016     wdt_a.obj (.text:WDT_A_hold)
+                  00010b7a    00000014     rts430x_lc_rd_eabi.lib : memcpy.c.obj (.text:memcpy)
+                  00010b8e    00000012     ctpl_sfr.obj (.text:ctpl_SFR_save)
+                  00010ba0    00000012     rts430x_lc_rd_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00010bb2    00000010     ctpl_port_int.obj (.text:ctpl_PORT_INT_epilogue)
+                  00010bc2    00000010     ctpl_sys.obj (.text:ctpl_SYS_save)
+                  00010bd2    0000000e     ctpl_fram.obj (.text:ctpl_FRAM_save)
+                  00010be0    0000000e     ctpl_wdt_a.obj (.text:ctpl_WDT_A_epilogue)
+                  00010bee    0000000c     ctpl_wdt_a.obj (.text:ctpl_WDT_A_save)
+                  00010bfa    0000000c     ctpl.obj (.text:ctpl_enterLpm45)
+                  00010c06    0000000a     ctpl_sfr.obj (.text:ctpl_SFR_restore)
+                  00010c10    00000006     pmm.obj (.text:PMM_unlockLPM5)
+                  00010c16    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  00010c1c    00000006     main.obj (.text:cmpfunc)
+                  00010c22    00000006     ctpl_sfr.obj (.text:ctpl_SFR_epilogue)
+                  00010c28    00000002     rts430x_lc_rd_eabi.lib : startup.c.obj (.text:_system_post_cinit)
+                  00010c2a    00000002     ctpl_wdt_a.obj (.text:ctpl_WDT_A_restore)
 
 MODULE SUMMARY
 
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     378    50        0      
+       main.obj                     414    100       2      
        ctpl_msp430fr5994.obj        0      288       128    
-       scheduler.obj                254    0         6      
+       scheduler.obj                262    0         30     
     +--+----------------------------+------+---------+---------+
-       Total:                       632    338       134    
+       Total:                       676    388       160    
                                                             
     .\driverlib\MSP430FR5xx_6xx\
        gpio.obj                     108    28        0      
@@ -379,9 +382,9 @@ MODULE SUMMARY
                                                             
     .\fram-utilities\ctpl\
        ctpl_low_level.obj           324    0         166    
-       ctpl.obj                     264    0         0      
+       ctpl.obj                     262    0         0      
     +--+----------------------------+------+---------+---------+
-       Total:                       588    0         166    
+       Total:                       586    0         166    
                                                             
     .\fram-utilities\ctpl\peripherals\
        ctpl_rtc_c.obj               216    0         0      
@@ -457,20 +460,20 @@ MODULE SUMMARY
        Stack:                       0      0         160    
        Linker Generated:            0      58        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 3114   500       460    
+       Grand Total:                 3156   550       486    
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 000045b8 records: 3, size/record: 8, table size: 24
-	.TI.persistent: load addr=000045a2, load size=00000009 bytes, run addr=00004008, run size=00000126 bytes, compression=lzss
-	.data: load addr=000045ab, load size=00000007 bytes, run addr=00004004, run size=00000003 bytes, compression=lzss
-	.bss: load addr=000045b2, load size=00000006 bytes, run addr=00004000, run size=00000004 bytes, compression=zero_init
+__TI_cinit_table @ 000045ea records: 3, size/record: 8, table size: 24
+	.TI.persistent: load addr=000045d4, load size=00000009 bytes, run addr=00004022, run size=00000126 bytes, compression=lzss
+	.data: load addr=000045dd, load size=00000007 bytes, run addr=00004016, run size=0000000b bytes, compression=lzss
+	.bss: load addr=000045e4, load size=00000006 bytes, run addr=00004000, run size=00000016 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00004596 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 000045c8 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -741,7 +744,7 @@ address   name
 000004bc  BIN2BCD                                
 000004bd  BIN2BCD_H                              
 000004bc  BIN2BCD_L                              
-00010bec  C$$EXIT                                
+00010c16  C$$EXIT                                
 0000043e  CAPTIO0CTL                             
 0000043f  CAPTIO0CTL_H                           
 0000043e  CAPTIO0CTL_L                           
@@ -931,9 +934,9 @@ address   name
 00000146  GCCTL1                                 
 00000147  GCCTL1_H                               
 00000146  GCCTL1_L                               
-000109a0  GPIO_setAsOutputPin                    
-00010aa2  GPIO_setOutputHighOnPin                
-00010abe  GPIO_setOutputLowOnPin                 
+0001097e  GPIO_setAsOutputPin                    
+00010ade  GPIO_setOutputHighOnPin                
+00010afa  GPIO_setOutputLowOnPin                 
 00000a80  LEACAP                                 
 00000a82  LEACAPH                                
 00000a80  LEACAPL                                
@@ -1366,7 +1369,7 @@ address   name
 0000012a  PMMIFG                                 
 0000012b  PMMIFG_H                               
 0000012a  PMMIFG_L                               
-00010be6  PMM_unlockLPM5                         
+00010c10  PMM_unlockLPM5                         
 00000158  RCCTL0                                 
 00000159  RCCTL0_H                               
 00000158  RCCTL0_L                               
@@ -2027,18 +2030,18 @@ address   name
 0000015c  WDTCTL                                 
 0000015d  WDTCTL_H                               
 0000015c  WDTCTL_L                               
-00010b28  WDT_A_hold                             
+00010b64  WDT_A_hold                             
 00002c00  __STACK_END                            
 000000a0  __STACK_SIZE                           
-000045b8  __TI_CINIT_Base                        
-000045d0  __TI_CINIT_Limit                       
-000045d0  __TI_CINIT_Warm                        
-00004596  __TI_Handler_Table_Base                
-000045a2  __TI_Handler_Table_Limit               
+000045ea  __TI_CINIT_Base                        
+00004602  __TI_CINIT_Limit                       
+00004602  __TI_CINIT_Warm                        
+000045c8  __TI_Handler_Table_Base                
+000045d4  __TI_Handler_Table_Limit               
 00004420  __TI_ISR_TRAP                          
-0001069e  __TI_auto_init_nobinit_nopinit_hold_wdt
-00010458  __TI_decompress_lzss                   
-00010b64  __TI_decompress_none                   
+000106b8  __TI_auto_init_nobinit_nopinit_hold_wdt
+000103c4  __TI_decompress_lzss                   
+00010ba0  __TI_decompress_none                   
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
 0000ffb8  __TI_int20                             
@@ -2079,93 +2082,95 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-00010a7e  __TI_zero_init_nomemset                
+00010aba  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
 00000001  __mpu_enable                           
-00010a02  __mpu_init                             
-00010b10  __mspabi_mpyi_f5hw                     
+00010a3c  __mpu_init                             
+00010b4c  __mspabi_mpyi_f5hw                     
 00004000  _appTasks                              
-00004004  _appTasksArg                           
-00004006  _appTasksFlag                          
+00004016  _appTasksArg                           
+0000401c  _appTasksFlag                          
 00004400  _c_int00_noargs_mpu                    
 0000fffe  _reset_vector                          
 00002b60  _stack                                 
-00010bfe  _system_post_cinit                     
-0001087e  _system_pre_init                       
-00010bec  abort                                  
-00010648  blink_led                              
-00010bf2  cmpfunc                                
-000044aa  ctpl_CS                                
-000106f2  ctpl_CS_restore                        
-000108fe  ctpl_CS_save                           
-000040ea  ctpl_CS_storage                        
-000044bc  ctpl_FRAM                              
-00010ada  ctpl_FRAM_restore                      
-00010ba6  ctpl_FRAM_save                         
-00004120  ctpl_FRAM_storage                      
-000044ce  ctpl_MPU                               
-00010594  ctpl_MPU_restore                       
-000108c2  ctpl_MPU_save                          
-000040c0  ctpl_MPU_storage                       
-000044e0  ctpl_MPY32                             
-000104ce  ctpl_MPY32_restore                     
-000105ee  ctpl_MPY32_save                        
-000040ae  ctpl_MPY32_storage                     
-000044f2  ctpl_PORTA                             
-000040ce  ctpl_PORTA_storage                     
-00004504  ctpl_PORTB                             
-000040dc  ctpl_PORTB_storage                     
-00004516  ctpl_PORTC                             
-00004102  ctpl_PORTC_storage                     
-00004528  ctpl_PORTD                             
-0000410c  ctpl_PORTD_storage                     
-0000453a  ctpl_PORTJ                             
-00004116  ctpl_PORTJ_storage                     
-00010b76  ctpl_PORT_INT_epilogue                 
-000107e8  ctpl_PORT_INT_restore                  
-00010744  ctpl_PORT_INT_save                     
-00010934  ctpl_PORT_restore                      
-000109d4  ctpl_PORT_save                         
-0000454c  ctpl_RTC_C                             
-000103c8  ctpl_RTC_C_restore                     
-00010836  ctpl_RTC_C_save                        
-000040f6  ctpl_RTC_C_storage                     
-0000455e  ctpl_SFR                               
-00010bf8  ctpl_SFR_epilogue                      
-00010bdc  ctpl_SFR_restore                       
-00010b52  ctpl_SFR_save                          
-00004124  ctpl_SFR_storage                       
-00004570  ctpl_SYS                               
-00010af6  ctpl_SYS_restore                       
-00010b86  ctpl_SYS_save                          
-00004128  ctpl_SYS_storage                       
-00004582  ctpl_WDT_A                             
-00010bb4  ctpl_WDT_A_epilogue                    
-00010c00  ctpl_WDT_A_restore                     
-00010bd0  ctpl_WDT_A_save                        
-0000412c  ctpl_WDT_A_storage                     
-00010bc2  ctpl_enterShutdown                     
+00010c28  _system_post_cinit                     
+000107fe  _system_pre_init                       
+00004014  a                                      
+00010c16  abort                                  
+000105b6  blink_led10                            
+0001060c  blink_led11                            
+00010c1c  cmpfunc                                
+000044dc  ctpl_CS                                
+0001070c  ctpl_CS_restore                        
+00010912  ctpl_CS_save                           
+00004104  ctpl_CS_storage                        
+000044ee  ctpl_FRAM                              
+00010b16  ctpl_FRAM_restore                      
+00010bd2  ctpl_FRAM_save                         
+0000413a  ctpl_FRAM_storage                      
+00004500  ctpl_MPU                               
+00010502  ctpl_MPU_restore                       
+000108d6  ctpl_MPU_save                          
+000040da  ctpl_MPU_storage                       
+00004512  ctpl_MPY32                             
+0001043a  ctpl_MPY32_restore                     
+0001055c  ctpl_MPY32_save                        
+000040c8  ctpl_MPY32_storage                     
+00004524  ctpl_PORTA                             
+000040e8  ctpl_PORTA_storage                     
+00004536  ctpl_PORTB                             
+000040f6  ctpl_PORTB_storage                     
+00004548  ctpl_PORTC                             
+0000411c  ctpl_PORTC_storage                     
+0000455a  ctpl_PORTD                             
+00004126  ctpl_PORTD_storage                     
+0000456c  ctpl_PORTJ                             
+00004130  ctpl_PORTJ_storage                     
+00010bb2  ctpl_PORT_INT_epilogue                 
+000107b0  ctpl_PORT_INT_restore                  
+0001075e  ctpl_PORT_INT_save                     
+00010948  ctpl_PORT_restore                      
+000109b2  ctpl_PORT_save                         
+0000457e  ctpl_RTC_C                             
+00010334  ctpl_RTC_C_restore                     
+00010846  ctpl_RTC_C_save                        
+00004110  ctpl_RTC_C_storage                     
+00004590  ctpl_SFR                               
+00010c22  ctpl_SFR_epilogue                      
+00010c06  ctpl_SFR_restore                       
+00010b8e  ctpl_SFR_save                          
+0000413e  ctpl_SFR_storage                       
+000045a2  ctpl_SYS                               
+00010b32  ctpl_SYS_restore                       
+00010bc2  ctpl_SYS_save                          
+00004142  ctpl_SYS_storage                       
+000045b4  ctpl_WDT_A                             
+00010be0  ctpl_WDT_A_epilogue                    
+00010c2a  ctpl_WDT_A_restore                     
+00010bee  ctpl_WDT_A_save                        
+00004146  ctpl_WDT_A_storage                     
+00010bfa  ctpl_enterLpm45                        
 00010000  ctpl_init                              
 00004428  ctpl_peripherals                       
-00004594  ctpl_peripheralsLen                    
+000045c6  ctpl_peripheralsLen                    
 0001004c  ctpl_saveCpuStackEnterLpm              
 00004400  fram_ipe_end                           
 00004400  fram_ipe_start                         
 00004000  fram_rw_start                          
 00004400  fram_rx_start                          
-00010a2e  getTaskIdx                             
-00010334  main                                   
-00010b3e  memcpy                                 
+00010a68  getTaskIdx                             
+0001088e  main                                   
+00010b7a  memcpy                                 
 0000a501  mpu_ctl0_value                         
 00001513  mpu_sam_value                          
 00000440  mpu_segment_border1                    
 00000440  mpu_segment_border2                    
-00010a56  postTask                               
-00010796  procTasks                              
+00010a92  postTask                               
+00010662  procTasks                              
 0001023e  qsort                                  
-00010538  setupTasks                             
-0001096a  sort_array                             
-00010b96  test                                   
+000104a4  setupTasks                             
+000109e0  sort_array_green                       
+00010a0e  sort_array_red                         
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3723,46 +3728,47 @@ address   name
 00002c00  __STACK_END                            
 00004000  _appTasks                              
 00004000  fram_rw_start                          
-00004004  _appTasksArg                           
-00004006  _appTasksFlag                          
-000040ae  ctpl_MPY32_storage                     
-000040c0  ctpl_MPU_storage                       
-000040ce  ctpl_PORTA_storage                     
-000040dc  ctpl_PORTB_storage                     
-000040ea  ctpl_CS_storage                        
-000040f6  ctpl_RTC_C_storage                     
-00004102  ctpl_PORTC_storage                     
-0000410c  ctpl_PORTD_storage                     
-00004116  ctpl_PORTJ_storage                     
-00004120  ctpl_FRAM_storage                      
-00004124  ctpl_SFR_storage                       
-00004128  ctpl_SYS_storage                       
-0000412c  ctpl_WDT_A_storage                     
+00004014  a                                      
+00004016  _appTasksArg                           
+0000401c  _appTasksFlag                          
+000040c8  ctpl_MPY32_storage                     
+000040da  ctpl_MPU_storage                       
+000040e8  ctpl_PORTA_storage                     
+000040f6  ctpl_PORTB_storage                     
+00004104  ctpl_CS_storage                        
+00004110  ctpl_RTC_C_storage                     
+0000411c  ctpl_PORTC_storage                     
+00004126  ctpl_PORTD_storage                     
+00004130  ctpl_PORTJ_storage                     
+0000413a  ctpl_FRAM_storage                      
+0000413e  ctpl_SFR_storage                       
+00004142  ctpl_SYS_storage                       
+00004146  ctpl_WDT_A_storage                     
 00004400  _c_int00_noargs_mpu                    
 00004400  fram_ipe_end                           
 00004400  fram_ipe_start                         
 00004400  fram_rx_start                          
 00004420  __TI_ISR_TRAP                          
 00004428  ctpl_peripherals                       
-000044aa  ctpl_CS                                
-000044bc  ctpl_FRAM                              
-000044ce  ctpl_MPU                               
-000044e0  ctpl_MPY32                             
-000044f2  ctpl_PORTA                             
-00004504  ctpl_PORTB                             
-00004516  ctpl_PORTC                             
-00004528  ctpl_PORTD                             
-0000453a  ctpl_PORTJ                             
-0000454c  ctpl_RTC_C                             
-0000455e  ctpl_SFR                               
-00004570  ctpl_SYS                               
-00004582  ctpl_WDT_A                             
-00004594  ctpl_peripheralsLen                    
-00004596  __TI_Handler_Table_Base                
-000045a2  __TI_Handler_Table_Limit               
-000045b8  __TI_CINIT_Base                        
-000045d0  __TI_CINIT_Limit                       
-000045d0  __TI_CINIT_Warm                        
+000044dc  ctpl_CS                                
+000044ee  ctpl_FRAM                              
+00004500  ctpl_MPU                               
+00004512  ctpl_MPY32                             
+00004524  ctpl_PORTA                             
+00004536  ctpl_PORTB                             
+00004548  ctpl_PORTC                             
+0000455a  ctpl_PORTD                             
+0000456c  ctpl_PORTJ                             
+0000457e  ctpl_RTC_C                             
+00004590  ctpl_SFR                               
+000045a2  ctpl_SYS                               
+000045b4  ctpl_WDT_A                             
+000045c6  ctpl_peripheralsLen                    
+000045c8  __TI_Handler_Table_Base                
+000045d4  __TI_Handler_Table_Limit               
+000045ea  __TI_CINIT_Base                        
+00004602  __TI_CINIT_Limit                       
+00004602  __TI_CINIT_Warm                        
 0000a501  mpu_ctl0_value                         
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
@@ -3805,58 +3811,59 @@ address   name
 00010000  ctpl_init                              
 0001004c  ctpl_saveCpuStackEnterLpm              
 0001023e  qsort                                  
-00010334  main                                   
-000103c8  ctpl_RTC_C_restore                     
-00010458  __TI_decompress_lzss                   
-000104ce  ctpl_MPY32_restore                     
-00010538  setupTasks                             
-00010594  ctpl_MPU_restore                       
-000105ee  ctpl_MPY32_save                        
-00010648  blink_led                              
-0001069e  __TI_auto_init_nobinit_nopinit_hold_wdt
-000106f2  ctpl_CS_restore                        
-00010744  ctpl_PORT_INT_save                     
-00010796  procTasks                              
-000107e8  ctpl_PORT_INT_restore                  
-00010836  ctpl_RTC_C_save                        
-0001087e  _system_pre_init                       
-000108c2  ctpl_MPU_save                          
-000108fe  ctpl_CS_save                           
-00010934  ctpl_PORT_restore                      
-0001096a  sort_array                             
-000109a0  GPIO_setAsOutputPin                    
-000109d4  ctpl_PORT_save                         
-00010a02  __mpu_init                             
-00010a2e  getTaskIdx                             
-00010a56  postTask                               
-00010a7e  __TI_zero_init_nomemset                
-00010aa2  GPIO_setOutputHighOnPin                
-00010abe  GPIO_setOutputLowOnPin                 
-00010ada  ctpl_FRAM_restore                      
-00010af6  ctpl_SYS_restore                       
-00010b10  __mspabi_mpyi_f5hw                     
-00010b28  WDT_A_hold                             
-00010b3e  memcpy                                 
-00010b52  ctpl_SFR_save                          
-00010b64  __TI_decompress_none                   
-00010b76  ctpl_PORT_INT_epilogue                 
-00010b86  ctpl_SYS_save                          
-00010b96  test                                   
-00010ba6  ctpl_FRAM_save                         
-00010bb4  ctpl_WDT_A_epilogue                    
-00010bc2  ctpl_enterShutdown                     
-00010bd0  ctpl_WDT_A_save                        
-00010bdc  ctpl_SFR_restore                       
-00010be6  PMM_unlockLPM5                         
-00010bec  C$$EXIT                                
-00010bec  abort                                  
-00010bf2  cmpfunc                                
-00010bf8  ctpl_SFR_epilogue                      
-00010bfe  _system_post_cinit                     
-00010c00  ctpl_WDT_A_restore                     
+00010334  ctpl_RTC_C_restore                     
+000103c4  __TI_decompress_lzss                   
+0001043a  ctpl_MPY32_restore                     
+000104a4  setupTasks                             
+00010502  ctpl_MPU_restore                       
+0001055c  ctpl_MPY32_save                        
+000105b6  blink_led10                            
+0001060c  blink_led11                            
+00010662  procTasks                              
+000106b8  __TI_auto_init_nobinit_nopinit_hold_wdt
+0001070c  ctpl_CS_restore                        
+0001075e  ctpl_PORT_INT_save                     
+000107b0  ctpl_PORT_INT_restore                  
+000107fe  _system_pre_init                       
+00010846  ctpl_RTC_C_save                        
+0001088e  main                                   
+000108d6  ctpl_MPU_save                          
+00010912  ctpl_CS_save                           
+00010948  ctpl_PORT_restore                      
+0001097e  GPIO_setAsOutputPin                    
+000109b2  ctpl_PORT_save                         
+000109e0  sort_array_green                       
+00010a0e  sort_array_red                         
+00010a3c  __mpu_init                             
+00010a68  getTaskIdx                             
+00010a92  postTask                               
+00010aba  __TI_zero_init_nomemset                
+00010ade  GPIO_setOutputHighOnPin                
+00010afa  GPIO_setOutputLowOnPin                 
+00010b16  ctpl_FRAM_restore                      
+00010b32  ctpl_SYS_restore                       
+00010b4c  __mspabi_mpyi_f5hw                     
+00010b64  WDT_A_hold                             
+00010b7a  memcpy                                 
+00010b8e  ctpl_SFR_save                          
+00010ba0  __TI_decompress_none                   
+00010bb2  ctpl_PORT_INT_epilogue                 
+00010bc2  ctpl_SYS_save                          
+00010bd2  ctpl_FRAM_save                         
+00010be0  ctpl_WDT_A_epilogue                    
+00010bee  ctpl_WDT_A_save                        
+00010bfa  ctpl_enterLpm45                        
+00010c06  ctpl_SFR_restore                       
+00010c10  PMM_unlockLPM5                         
+00010c16  C$$EXIT                                
+00010c16  abort                                  
+00010c1c  cmpfunc                                
+00010c22  ctpl_SFR_epilogue                      
+00010c28  _system_post_cinit                     
+00010c2a  ctpl_WDT_A_restore                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[1686 symbols]
+[1688 symbols]

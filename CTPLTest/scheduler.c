@@ -73,7 +73,8 @@ void procTasks(){
     while (haveTasks){
         haveTasks=false;
         unsigned char taskCounter;
-        for (taskCounter=0; taskCounter<=1;taskCounter++){
+        for (taskCounter=0; taskCounter<=1; taskCounter++){
+            taskCounter++;
             auxPtr = _appTasks;
             auxFlag = _appTasksFlag;
             auxArg = _appTasksArg;
