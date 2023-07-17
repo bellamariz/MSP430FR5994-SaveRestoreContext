@@ -56,7 +56,7 @@ int _system_pre_init(void) {
 
     WDT_A_hold(WDT_A_BASE); // Stop watchdog timer
 
-    setupTasks(1, sort_array_red, sort_array_green);
+//    setupTasks(1, sort_array_red, sort_array_green);
 
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0 + GPIO_PIN1);
     GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0 + GPIO_PIN1);
@@ -70,11 +70,14 @@ int _system_pre_init(void) {
  * main.c
  */
 int main(void) {
-    while (1) {
-        postTask(sort_array_red, 2);
-        postTask(sort_array_green, 5);
+    unsigned int i = 0;
+    while (i++ < 10) {
+        blink_led11(i);
+        // postTask(sort_array_red, 2);
+        // postTask(sort_array_green, 5);
+        // procTasks();
 
-        procTasks();
+        ctpl_saveContext();
     }
 
     return 0;

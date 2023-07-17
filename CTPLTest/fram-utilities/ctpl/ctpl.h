@@ -344,6 +344,10 @@ extern void ctpl_enterLpm45(bool restoreOnReset);
 //******************************************************************************
 extern void ctpl_enterShutdown(uint16_t timeout);
 
+extern void ctpl_saveContext(void);
+
+extern void ctpl_restore(uint16_t mode);
+
 //*****************************************************************************
 //
 // Mark the end of the C bindings section for C++ compilers.

@@ -168,6 +168,8 @@ extern "C"
 //******************************************************************************
 extern uint16_t ctpl_saveCpuStackEnterLpm(uint16_t mode, uint16_t timeout);
 
+extern uint16_t ctpl_saveCpuStack(uint16_t mode, uint16_t timeout);
+
 #endif /* __IAR_SYSTEMS_ASM__ */
 
 //*****************************************************************************

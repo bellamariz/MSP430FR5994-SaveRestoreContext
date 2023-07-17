@@ -18,6 +18,7 @@
 #include "peripherals/ctpl_peripherals.h"
 
 static void ctpl_saveEnterLpmRestore(uint16_t mode, bool restoreOnReset, uint16_t timeout);
+static void ctpl_save(uint16_t mode, bool restoreOnReset, uint16_t timeout);
 
 /*
  * Save peripheral, stack and cpu context and enter into LPM3.5.
@@ -45,6 +46,16 @@ void ctpl_enterLpm45(bool restoreOnReset)
 void ctpl_enterShutdown(uint16_t timeout)
 {
     ctpl_saveEnterLpmRestore(CTPL_MODE_SHUTDOWN, CTPL_ENABLE_RESTORE_ON_RESET, timeout);
+    return;
+}
+
+/*
+ * Save peripheral, stack and cpu context, but does not wait for SVS to put the device
+ * into BOR. No timeout, no stopping execution. Only restore after a power loss.
+ */
+void ctpl_saveContext(void)
+{
+    ctpl_save(CTPL_MODE_SHUTDOWN, CTPL_ENABLE_RESTORE_ON_RESET, 0);
     return;
 }
 
@@ -169,3 +180,63 @@ static void ctpl_saveEnterLpmRestore(uint16_t mode, bool restoreOnReset, uint16_
 
     return;
 }
+
+/*
+ * Save peripheral, stack and cpu context. Peripheral context saved is
+ * defined by the ctpl_peripherals array in the device abstraction.
+ */
+static void ctpl_save(uint16_t mode, bool restoreOnReset, uint16_t timeout)
+{
+    uint16_t i;
+    uint16_t interruptState;
+    uint16_t baseAddress;
+    uint16_t *storage;
+
+    /* Global disable interrupts until finish saving */
+    interruptState = __get_interrupt_state();
+    __disable_interrupt();
+
+#ifdef CTPL_BENCHMARK
+    /* Toggle benchmark pin and set to high while saving state. */
+    CTPL_BENCHMARK_DIR |= CTPL_BENCHMARK_PIN;
+    CTPL_BENCHMARK_OUT &= ~CTPL_BENCHMARK_PIN;
+    CTPL_BENCHMARK_OUT |= CTPL_BENCHMARK_PIN;
+#endif
+
+    /* Save FRAM lock state and unlock FRAM (FR2XX and FR4XX only) */
+#if defined(__MSP430FR2XX_4XX_FAMILY__)
+    uint16_t framState = ctpl_unlockFRAM();
+#endif
+
+    /* Set restore on reset flag if enabled. */
+    if (restoreOnReset) {
+        mode |= CTPL_MODE_RESTORE_RESET;
+    }
+
+    /*
+     * Save peripherals in reverse order. The order of the peripheral array
+     * determines the order the peripherals are restored where the first
+     * peripheral is restored first.
+     */
+    for (i = ctpl_peripheralsLen; i-- > 0;) {
+        baseAddress = ctpl_peripherals[i]->baseAddress;
+        storage = ctpl_peripherals[i]->storage;
+        ctpl_peripherals[i]->save(baseAddress, storage, mode);
+    }
+
+    /*
+     * Save CPU state. This function will return when it finishes saving.
+     */
+    ctpl_saveCpuStack(mode, timeout);
+
+    /* Restore FRAM lock state (FR2XX and FR4XX only) */
+#if defined(__MSP430FR2XX_4XX_FAMILY__)
+    ctpl_lockFRAM(framState);
+#endif
+
+    /* Restore interrupt state. */
+    __set_interrupt_state(interruptState);
+
+    return;
+}
+
