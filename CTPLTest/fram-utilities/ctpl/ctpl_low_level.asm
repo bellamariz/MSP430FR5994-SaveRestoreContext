@@ -134,7 +134,7 @@ ctpl_wakeup:
     movx.a  #ctpl_stackCopy,R5                  ; src ptr
     copyx   R5,R6,R4                            ; copy the stack
     popm.a  #8,R11                              ; Restore R4-R11 from stack
-    movx.w  #CTPL_STATE_INVALID,&ctpl_state     ; Mark the state as invalid
+    ; movx.w  #CTPL_STATE_INVALID,&ctpl_state     ; Mark the state as invalid
 ctpl_return:
     movx.w  &ctpl_mode,R12                      ; Return CTPL mode
     restoreFRAM                                 ; Restore FRAM state (FR2xx and FR4xx only)

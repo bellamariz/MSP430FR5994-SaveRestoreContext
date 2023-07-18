@@ -68,25 +68,21 @@ void procTasks(){
     unsigned char* auxArg;
     unsigned char haveTasks=true;
     unsigned char maxTasks;
+    unsigned char tt;
 
     // Call pending tasks
     while (haveTasks){
         haveTasks=false;
-        unsigned char taskCounter;
-        for (taskCounter=0; taskCounter<=1; taskCounter++){
-            taskCounter++;
-            auxPtr = _appTasks;
-            auxFlag = _appTasksFlag;
-            auxArg = _appTasksArg;
-            maxTasks = MAX_APP_TASKS;
-            unsigned char tt;
-            for (tt=0; tt < maxTasks; tt++){
-                if (auxFlag[tt]==true){
-                    auxFlag[tt]=false;
-                    haveTasks=true;
-                    auxPtr[tt](auxArg[tt]);
-                    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
-                }
+        auxPtr = _appTasks;
+        auxFlag = _appTasksFlag;
+        auxArg = _appTasksArg;
+        maxTasks = MAX_APP_TASKS;
+        for (tt=0; tt < maxTasks; tt++){
+            if (auxFlag[tt]==true){
+                ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_512_MS);
+                auxFlag[tt]=false;
+                haveTasks=true;
+                auxPtr[tt](auxArg[tt]);
             }
         }
     }
