@@ -2,7 +2,6 @@
 
 task_ptr_t _appTasks[MAX_APP_TASKS];
 volatile unsigned char _appTasksFlag[MAX_APP_TASKS]={false};
-volatile unsigned char _appTasksArg[MAX_APP_TASKS]={0};
 
 void setupTasks(unsigned char doSetup, ...){
     if (!doSetup) return;
@@ -10,13 +9,11 @@ void setupTasks(unsigned char doSetup, ...){
     va_list args;
     task_ptr_t* auxPtr;
     unsigned char* auxFlag;
-    unsigned char* auxArg;
     unsigned char taskCount=0;
     unsigned char maxTasks;
 
     auxPtr  = _appTasks;
     auxFlag = _appTasksFlag;
-    auxArg  = _appTasksArg;
     maxTasks = MAX_APP_TASKS;
 
     va_start(args,doSetup);
@@ -24,7 +21,6 @@ void setupTasks(unsigned char doSetup, ...){
 
     while (((auxPtr[taskCount++]=va_arg(args,task_ptr_t)) != 0) && (taskCount < maxTasks)){
       auxFlag[taskCount]=false;
-      auxArg[taskCount]=0;
     }
     taskCount--;
     va_end(args);
@@ -45,15 +41,12 @@ char getTaskIdx(task_ptr_t fx){
     return -1;
 }
 
-char postTask(task_ptr_t fx, unsigned char arg1){
+char postTask(task_ptr_t fx){
     char idx;
     unsigned char* auxFlag;
-    unsigned char* auxArg;
     auxFlag = _appTasksFlag;
-    auxArg = _appTasksArg;
     idx = getTaskIdx(fx);
     if (idx >=0) {
-        auxArg[idx] = arg1;
         auxFlag[idx] = true;
         return 0;
     } else{
@@ -65,7 +58,6 @@ char postTask(task_ptr_t fx, unsigned char arg1){
 void procTasks(){
     task_ptr_t* auxPtr;
     unsigned char* auxFlag;
-    unsigned char* auxArg;
     unsigned char haveTasks=true;
     unsigned char maxTasks;
     unsigned char tt;
@@ -75,14 +67,13 @@ void procTasks(){
         haveTasks=false;
         auxPtr = _appTasks;
         auxFlag = _appTasksFlag;
-        auxArg = _appTasksArg;
         maxTasks = MAX_APP_TASKS;
         for (tt=0; tt < maxTasks; tt++){
             if (auxFlag[tt]==true){
                 ctpl_enterShutdown(CTPL_SHUTDOWN_TIMEOUT_512_MS);
                 auxFlag[tt]=false;
                 haveTasks=true;
-                auxPtr[tt](auxArg[tt]);
+                auxPtr[tt]();
             }
         }
     }

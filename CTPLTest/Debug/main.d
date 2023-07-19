@@ -19,7 +19,6 @@ main.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/mach
 main.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
 main.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
 main.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
-main.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 main.obj: C:/Users/AdmGistLab2/Documents/msp430novo/CTPLTest/driverlib/MSP430FR5xx_6xx/driverlib.h
 main.obj: C:/Users/AdmGistLab2/Documents/msp430novo/CTPLTest/driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h
 main.obj: C:/Users/AdmGistLab2/Documents/msp430novo/CTPLTest/driverlib/MSP430FR5xx_6xx/esi.h
@@ -97,8 +96,6 @@ C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdin
 C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 
 C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
-
-C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
 
 C:/Users/AdmGistLab2/Documents/msp430novo/CTPLTest/driverlib/MSP430FR5xx_6xx/driverlib.h:
 

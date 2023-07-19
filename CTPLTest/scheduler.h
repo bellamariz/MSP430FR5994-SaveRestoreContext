@@ -19,11 +19,11 @@
 #endif
 
 typedef enum {app=0,vtimer} taskId_t;
-typedef void (*task_ptr_t)(unsigned char);
+typedef void (*task_ptr_t)(void);
 
 void setupTasks(unsigned char doSetup, ...);
 char getTaskIdx(task_ptr_t fx);
-char postTask(task_ptr_t fx, unsigned char arg1);
+char postTask(task_ptr_t fx);
 void procTasks();
 
 #endif /* SCHEDULER_H_ */
