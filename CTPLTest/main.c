@@ -4,41 +4,45 @@
 #include <driverlib.h>
 #include "scheduler.h"
 
+//volatile unsigned int counter = 0;
+
 void GPIO_init(void);
-void UART_init(void);
+//void UART_init(void);
+//void XT1_init(void);
 
 void GPIO_init(void) {
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0 + GPIO_PIN1);
     GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0 + GPIO_PIN1);
-    GPIO_setAsPeripheralModuleFunctionInputPin(
-        GPIO_PORT_P6,
-        GPIO_PIN0,
-        GPIO_SECONDARY_MODULE_FUNCTION
-        );
+//    P6SEL1 &= ~(0x0000 | 0x0000);               // USCI_A3 UART operation
+//    P6SEL0 |= (0x0001 | 0x0000);                // USCI_A3 UART operation
+//    PJSEL0 |= BIT4 | BIT5;                  // Configure XT1 pins
 }
 
 
-void UART_init() {
-    // Configure UART
-    EUSCI_A_UART_initParam param = {0};
-    param.selectClockSource = EUSCI_A_UART_CLOCKSOURCE_ACLK;
-    param.clockPrescalar = 3;
-    param.firstModReg = 0;
-    param.secondModReg = 92;
-    param.parity = EUSCI_A_UART_NO_PARITY;
-    param.msborLsbFirst = EUSCI_A_UART_LSB_FIRST;
-    param.numberofStopBits = EUSCI_A_UART_ONE_STOP_BIT;
-    param.uartMode = EUSCI_A_UART_MODE;
-    param.overSampling = EUSCI_A_UART_LOW_FREQUENCY_BAUDRATE_GENERATION;
-
-    if (STATUS_FAIL == EUSCI_A_UART_init(EUSCI_A0_BASE, &param)) {
-        return;
-    }
-
-    EUSCI_A_UART_enable(EUSCI_A0_BASE);
-
-    EUSCI_A_UART_clearInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT);
-}
+//void UART_init() {
+//    // Configure USCI_A3 for UART mode
+//    UCA3CTLW0 |= UCSWRST;
+//    UCA3CTLW0 |= UCSSEL__ACLK;                // Set ACLK = 32768 as UCBRCLK
+//    UCA3BRW = 3;                            // 9600 baud
+//    UCA3MCTLW |= 0x5300;                    // 32768/9600 - INT(32768/9600)=0.41
+//                                            // UCBRSx value = 0x53 (See UG)
+//    UCA3CTLW0 &= ~UCSWRST;                   // release from reset
+//}
+//
+//void XT1_init() {
+//    // XT1 Setup
+//    CSCTL0_H = CSKEY_H;                     // Unlock CS registers
+//    CSCTL1 = DCOFSEL_0;                     // Set DCO to 1MHz
+//    CSCTL2 = SELA__LFXTCLK | SELS__DCOCLK | SELM__DCOCLK;
+//    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers
+//    CSCTL4 &= ~LFXTOFF;                     // Enable LFXT1
+//    do
+//    {
+//        CSCTL5 &= ~LFXTOFFG;                // Clear XT1 fault flag
+//        SFRIFG1 &= ~OFIFG;
+//    } while (SFRIFG1 & OFIFG);              // Test oscillator fault flag
+//    CSCTL0_H = 0;                           // Lock CS registers
+//}
 
 int cmpfunc(const void* a, const void* b) {
    return *(int*)a - *(int*)b;
@@ -98,9 +102,9 @@ int _system_pre_init(void) {
     setupTasks(1, sort_array_red, sort_array_green, green_red);
 
     GPIO_init();
-    UART_init();
-
     PMM_unlockLPM5();
+//    XT1_init(); // needs to be after unlockLPM5
+//    UART_init();
 
     return 0;
 }
@@ -109,14 +113,14 @@ int _system_pre_init(void) {
  * main.c
  */
 int main(void) {
-    unsigned int counter = 0;
+//    volatile unsigned int counter = 46;
     while (1) {
         postTask(sort_array_red, 2);
         postTask(sort_array_green, 5);
         postTask(green_red, 3);
 
-        EUSCI_A_UART_transmitData(EUSCI_A0_BASE, counter);
-        counter++;
+        // while(!(UCA3IFG & UCRXIFG));
+//        UCA3TXBUF = counter;                 // Load data onto buffer
 
         procTasks();
     }
